@@ -5,6 +5,6 @@
 # If it is blank or old, the News score is "not available" and the day can never be a full TRADE.
 # Update it once a week after checking an economic calendar (set today's date, add the week's events).
 checked: 2026-10-31
-2026-11-06 13:30   # US jobs report / NFP (October data), 8:30 ET - confirmed on bls.gov
+2026-11-06 13:30   # US jobs report / NFP (October data), 8:30 ET - confirmed on  bls.gov
 2026-11-10 13:30   # US CPI (October data), 8:30 ET - confirmed on bls.gov
 # 2026-11-03: US midterm elections (no fixed time, so not listed) - expect headline volatility
