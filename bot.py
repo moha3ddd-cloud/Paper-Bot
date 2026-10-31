@@ -297,10 +297,12 @@ def notify(text):
     if not tok or not chat:
         return
     try:
-        requests.post(f"https://api.telegram.org/bot{tok}/sendMessage",
-                      json={"chat_id": chat, "text": text[:4000]}, timeout=10)
+        r = requests.post(f"https://api.telegram.org/bot{tok.strip()}/sendMessage",
+                          json={"chat_id": chat.strip(), "text": text[:4000]}, timeout=10)
+        if not r.ok:
+            print(f"telegram error {r.status_code}: {r.text[:200]}")
     except Exception as e:
-        print("telegram error:", e)
+        print("telegram error:", type(e).__name__)
 
 
 def load_state():
