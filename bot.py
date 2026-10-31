@@ -367,10 +367,12 @@ def load_events(now):
             if not line:
                 continue
             if line.lower().startswith("checked:"):
+                val = line.split(":", 1)[1].strip()
                 try:
-                    checked = pd.Timestamp(line.split(":", 1)[1].strip(), tz="UTC")
+                    t = pd.Timestamp(val, tz="UTC") if val else pd.NaT   # empty string would parse as NaT
+                    checked = None if pd.isna(t) else t
                 except Exception:
-                    pass
+                    checked = None
                 continue
             try:
                 t = pd.Timestamp(line)
