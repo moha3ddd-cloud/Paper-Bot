@@ -1,0 +1,7 @@
+# High-impact news (FOMC, CPI, NFP, big speeches...). One UTC date-time per line, e.g.:
+# 2026-11-05 19:00   # FOMC
+#
+# The bot treats this file as valid data ONLY if the line below is within the last 7 days.
+# Until you fill it in, the News score is "not available" and the day can never be a full TRADE.
+# Update it once a week after checking an economic calendar (set today's date, add the week's events).
+checked:
