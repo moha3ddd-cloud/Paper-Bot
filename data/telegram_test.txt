@@ -1,0 +1,5 @@
+token: set=True len=46 has_colon=True has_space_or_newline=False
+chat id: set=True len=10 numeric=True has_space_or_newline=False
+getMe: HTTP 200 ok bot=@Ptraderm_bot
+sendMessage: HTTP 200 ok
+getUpdates: 1 update(s) from 1 chat(s); configured chat id among them: True
