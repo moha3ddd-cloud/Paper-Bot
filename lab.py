@@ -64,8 +64,9 @@ def load_panels(ex):
 
 
 # ----------------------------------------------------------------- candidates (weights decided at day close)
-def w_xsmom(c, lookback=30, top=3, abs_filter=False, rebal=7):
+def w_xsmom(c, lookback=30, top=3, abs_filter=False, rebal=7, regime=False):
     mom = c / c.shift(lookback) - 1
+    btc_ok = (c["BTC"] > c["BTC"].ewm(span=200, adjust=False).mean()) & (c["BTC"].notna().cumsum() >= 200)
     W = pd.DataFrame(0.0, index=c.index, columns=c.columns)
     cur = pd.Series(0.0, index=c.columns)
     for i, t in enumerate(c.index):
@@ -74,7 +75,7 @@ def w_xsmom(c, lookback=30, top=3, abs_filter=False, rebal=7):
             if abs_filter:
                 m = m[m > 0]
             cur = pd.Series(0.0, index=c.columns)
-            if len(m):
+            if len(m) and not (regime and not btc_ok.loc[t]):
                 cur[m.index] = 1.0 / top
         W.loc[t] = cur
     return W
@@ -105,6 +106,7 @@ CANDIDATES = {
     "M1": lambda c: w_xsmom(c),
     "M2": lambda c: w_xsmom(c, abs_filter=True),
     "M3": lambda c: w_trend(c, vol_target=0.5),
+    "M4": lambda c: w_xsmom(c, regime=True),      # M1 + cash whenever BTC is below its daily EMA200
 }
 BENCH = {"EW_BUY_HOLD": w_ew, "T2_EW": lambda c: w_trend(c)}
 
@@ -143,6 +145,12 @@ def load_log():
     return {"attempts": 0, "runs": [], "vault_used": None}
 
 
+def vault_start_of(lg):
+    """The vault start date is FIXED (not 'last day - 365'), so vault days can never leak into development.
+    New data that arrives after sealing simply extends the vault."""
+    return pd.Timestamp(lg.setdefault("vault_start", "2025-10-31"), tz="UTC")
+
+
 def save_log(lg):
     os.makedirs("data", exist_ok=True)
     with open(LOG, "w") as f:
@@ -157,15 +165,17 @@ def write_out(name, text):
 
 
 # ----------------------------------------------------------------- modes
-def dev(ex):
+def dev(ex, only=""):
+    lg = load_log()
+    vault_start = vault_start_of(lg)
     o, c = load_panels(ex)
-    vault_start = c.index.max() - pd.Timedelta(days=VAULT_DAYS)
     o, c = o[o.index < vault_start], c[c.index < vault_start]
     assert c.index.max() < vault_start, "vault leak"          # development can never see the vault
-    lg = load_log()
-    lg["attempts"] += len(CANDIDATES)
-    lg["runs"].append({"when": str(pd.Timestamp.now(tz="UTC")), "candidates": list(CANDIDATES)})
-    req = BASE_SHARPE + 0.05 * max(0, lg["attempts"] - len(CANDIDATES))
+    new = [only] if only else list(CANDIDATES)                 # only NEW candidates count as attempts
+    assert all(n in CANDIDATES for n in new), "unknown candidate"
+    lg["attempts"] += len(new)
+    lg["runs"].append({"when": str(pd.Timestamp.now(tz="UTC")), "candidates": new})
+    req = BASE_SHARPE + 0.05 * max(0, lg["attempts"] - 3)      # the first 3 candidates were the pre-registered batch
 
     res, turns = {}, {}
     for name, fn in {**CANDIDATES, **BENCH}.items():
@@ -188,9 +198,9 @@ def dev(ex):
         L.append(fmt("2nd half", h2))
         L.append("")
         verdict[name] = (a, h1, h2)
-    L.append("DEV CHECK (candidates only):")
+    L.append(f"DEV CHECK (candidates in this run: {', '.join(new)}; the others are shown for reference):")
     bh = verdict["EW_BUY_HOLD"][0]
-    for name in CANDIDATES:
+    for name in new:
         a, h1, h2 = verdict[name]
         checks = [(f"Sharpe>={req:.2f}", a["sh"] >= req), ("both halves Sharpe>=0.3", h1["sh"] >= 0.3 and h2["sh"] >= 0.3),
                   ("beats buy&hold Sharpe", a["sh"] > bh["sh"])]
@@ -209,7 +219,7 @@ def vault(ex, cand):
         print("unknown candidate", cand)
         sys.exit(1)
     o, c = load_panels(ex)
-    vault_start = c.index.max() - pd.Timedelta(days=VAULT_DAYS)
+    vault_start = vault_start_of(lg)
     L = [f"LAB VAULT (one shot) candidate {cand} | {vault_start:%Y-%m-%d} -> {c.index.max():%Y-%m-%d} | "
          f"attempts before this: {lg['attempts']}", ""]
     out = {}
@@ -231,9 +241,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=["dev", "vault"])
     ap.add_argument("--candidate", default="")
+    ap.add_argument("--only", default="", help="dev mode: run only this NEW candidate (counts as 1 attempt)")
     a = ap.parse_args(argv)
     ex = bot.make_exchange()
-    dev(ex) if a.mode == "dev" else vault(ex, a.candidate)
+    dev(ex, a.only) if a.mode == "dev" else vault(ex, a.candidate)
 
 
 if __name__ == "__main__":

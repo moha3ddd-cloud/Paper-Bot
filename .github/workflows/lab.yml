@@ -9,6 +9,9 @@ on:
       candidate:
         description: "candidate name (vault mode only), e.g. M2"
         default: ""
+      only:
+        description: "dev mode: run only this NEW candidate, e.g. M4 (counts as 1 attempt)"
+        default: ""
       probe:
         description: "run the funding-rate data probe (true/false)"
         default: "true"
@@ -42,7 +45,7 @@ jobs:
       - name: Run lab
         env:
           EXCHANGE: okx
-        run: python lab.py ${{ github.event.inputs.mode }} --candidate "${{ github.event.inputs.candidate }}"
+        run: python lab.py ${{ github.event.inputs.mode }} --candidate "${{ github.event.inputs.candidate }}" --only "${{ github.event.inputs.only }}"
 
       - name: Save results
         if: always()
