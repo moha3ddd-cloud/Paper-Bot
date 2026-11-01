@@ -1,0 +1,10 @@
+okx: 290 records, 96 days of history (2026-07-27 -> 2026-11-01)
+bitget: 100 records, 33 days of history (2026-09-29 -> 2026-11-01)
+gate: FAILED BadRequest: gate {"label":"INVALID_PARAM_VALUE","message":"from time exceeds 180-day limit"}
+bybit: FAILED RateLimitExceeded: bybit GET https://api.bybit.com/v5/market/instruments-info?category=spot 403 Forbidden {
+    error:The Amazon 
+binance: FAILED ExchangeNotAvailable: binance GET https://api.binance.com/api/v3/exchangeInfo 451  {
+  "code": 0,
+  "msg": "Service unavailable from
+kucoinfutures: 100 records, 33 days of history (2026-09-29 -> 2026-11-01)
+mexc: 100 records, 33 days of history (2026-09-29 -> 2026-11-01)

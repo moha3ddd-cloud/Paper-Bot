@@ -1,0 +1,33 @@
+LAB DEV 2022-03-18 -> 2025-10-29 | vault (sealed) starts 2025-10-31 | coins: 17 (BTC, ETH, SOL, XRP, DOGE, ADA, AVAX, LINK, DOT, LTC, TRX, ATOM, UNI, NEAR, BCH, ETC, FIL)
+cost 0.10% per unit turnover | attempts so far: 3 | required dev Sharpe: 0.80
+survivorship bias: coin list is today's liquid coins -> results are an upper bound
+
+M1
+  all dev   return    +227.0% | Sharpe +0.81 | maxDD  59.8% | avg daily turnover 10.4%
+  1st half  return     +92.0% | Sharpe +0.85 | maxDD  59.8%
+  2nd half  return     +70.3% | Sharpe +0.77 | maxDD  50.3%
+
+M2
+  all dev   return    +122.0% | Sharpe +0.67 | maxDD  59.2% | avg daily turnover 9.2%
+  1st half  return     +49.5% | Sharpe +0.67 | maxDD  59.2%
+  2nd half  return     +48.5% | Sharpe +0.66 | maxDD  55.4%
+
+M3
+  all dev   return     +52.5% | Sharpe +0.64 | maxDD  23.3% | avg daily turnover 0.9%
+  1st half  return     +12.8% | Sharpe +0.58 | maxDD  10.6%
+  2nd half  return     +35.2% | Sharpe +0.73 | maxDD  23.3%
+
+EW_BUY_HOLD
+  all dev   return     +22.4% | Sharpe +0.43 | maxDD  71.6% | avg daily turnover 0.0%
+  1st half  return     -21.2% | Sharpe +0.16 | maxDD  71.6%
+  2nd half  return     +55.3% | Sharpe +0.70 | maxDD  57.5%
+
+T2_EW
+  all dev   return     +35.7% | Sharpe +0.42 | maxDD  44.8% | avg daily turnover 0.5%
+  1st half  return     +16.6% | Sharpe +0.55 | maxDD  17.4%
+  2nd half  return     +16.4% | Sharpe +0.42 | maxDD  44.8%
+
+DEV CHECK (candidates only):
+  M1: ELIGIBLE FOR VAULT  Sharpe>=0.80=ok, both halves Sharpe>=0.3=ok, beats buy&hold Sharpe=ok
+  M2: FAIL  Sharpe>=0.80=NO, both halves Sharpe>=0.3=ok, beats buy&hold Sharpe=ok
+  M3: FAIL  Sharpe>=0.80=NO, both halves Sharpe>=0.3=ok, beats buy&hold Sharpe=ok
