@@ -1,0 +1,38 @@
+{
+ "start": 1000.0,
+ "sleeves": {
+  "BTC/USDT": {
+   "cash": 0.0,
+   "units": 0.0025707635476536956,
+   "entry": 77720.1,
+   "since": "2026-11-01"
+  },
+  "ETH/USDT": {
+   "cash": 0.0,
+   "units": 0.08819634501633265,
+   "entry": 2265.4,
+   "since": "2026-11-01"
+  },
+  "SOL/USDT": {
+   "cash": 0.0,
+   "units": 2.0952181208053693,
+   "entry": 95.36,
+   "since": "2026-11-01"
+  },
+  "XRP/USDT": {
+   "cash": 200.0,
+   "units": 0.0,
+   "entry": null,
+   "since": null
+  },
+  "BNB/USDT": {
+   "cash": 0.0,
+   "units": 0.2841862714419822,
+   "entry": 703.06,
+   "since": "2026-11-01"
+  }
+ },
+ "last_day": "2026-11-01",
+ "trades": [],
+ "started": "2026-11-01"
+}
