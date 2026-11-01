@@ -1,0 +1,32 @@
+RESEARCH 2025-11-01 -> 2026-11-01 | train until 2026-06-26 | exchange okx
+symbols: BTC, ETH, SOL, XRP, BNB | costs: fee 0.05%/side + slip 0.02%
+avgR [95% bootstrap interval]. PF = profit factor.
+
+A_pullback_15m
+ NET
+  train  trades  191 | win  47.1% | avgR -0.166 [-0.32,-0.02] | PF 0.68 | maxDD 10.4% | symbols PF>1: 0/5
+  test   trades   89 | win  47.2% | avgR -0.200 [-0.41,+0.01] | PF 0.68 | maxDD  5.8% | symbols PF>1: 1/5
+ GROSS (no costs)
+  train  trades  231 | win  49.8% | avgR +0.014 [-0.12,+0.15] | PF 0.90 | maxDD  9.1% | symbols PF>1: 1/5
+  test   trades  113 | win  49.6% | avgR -0.014 [-0.20,+0.18] | PF 1.00 | maxDD  4.5% | symbols PF>1: 3/5
+
+B_pullback_1h
+ NET
+  train  trades   79 | win  46.8% | avgR -0.045 [-0.29,+0.19] | PF 0.93 | maxDD  3.8% | symbols PF>1: 2/5
+  test   trades   34 | win  38.2% | avgR -0.337 [-0.64,+0.00] | PF 0.37 | maxDD  3.3% | symbols PF>1: 0/5
+ GROSS (no costs)
+  train  trades   80 | win  47.5% | avgR +0.044 [-0.19,+0.29] | PF 1.09 | maxDD  3.0% | symbols PF>1: 2/5
+  test   trades   36 | win  41.7% | avgR -0.141 [-0.47,+0.22] | PF 0.60 | maxDD  3.0% | symbols PF>1: 1/5
+
+C_breakout_1h
+ NET
+  train  trades  153 | win  66.0% | avgR +0.230 [+0.07,+0.38] | PF 1.81 | maxDD  3.3% | symbols PF>1: 5/5
+  test   trades   71 | win  50.7% | avgR -0.090 [-0.34,+0.15] | PF 0.79 | maxDD  4.2% | symbols PF>1: 2/5
+ GROSS (no costs)
+  train  trades  156 | win  66.7% | avgR +0.321 [+0.17,+0.47] | PF 2.18 | maxDD  3.0% | symbols PF>1: 5/5
+  test   trades   77 | win  50.6% | avgR -0.012 [-0.24,+0.22] | PF 0.90 | maxDD  3.7% | symbols PF>1: 2/5
+
+PRE-REGISTERED CHECK (net, test period):
+  A_pullback_15m: FAIL  test trades >= 50=ok, test PF >= 1.3=NO, test avgR > 0=NO, CI low > -0.05=NO, train PF > 1=NO
+  B_pullback_1h: FAIL  test trades >= 50=NO, test PF >= 1.3=NO, test avgR > 0=NO, CI low > -0.05=NO, train PF > 1=NO
+  C_breakout_1h: FAIL  test trades >= 50=ok, test PF >= 1.3=NO, test avgR > 0=NO, CI low > -0.05=NO, train PF > 1=ok
