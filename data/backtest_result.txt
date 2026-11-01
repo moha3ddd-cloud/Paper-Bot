@@ -1,0 +1,6 @@
+Downloading data from okx (180 days)... this takes a few minutes
+BTC/USDT   trades   20 | win  45.0% | avgR -0.15 | PF 0.89 | return   -0.93% | maxDD  4.16%
+ETH/USDT   trades   32 | win  50.0% | avgR -0.18 | PF 0.70 | return   -3.54% | maxDD  5.02%
+SOL/USDT   trades   37 | win  45.9% | avgR -0.19 | PF 0.64 | return   -5.22% | maxDD  6.55%
+Saved backtest_trades.csv
+Each symbol runs on its own 1000$ account with fees + slippage. The daily assessment is not included (no history for it). Results are NOT a promise.
