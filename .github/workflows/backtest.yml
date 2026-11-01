@@ -1,0 +1,41 @@
+name: backtest
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "History length in days"
+        default: "180"
+
+permissions:
+  contents: write
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run backtest
+        env:
+          EXCHANGE: okx
+        run: |
+          mkdir -p data
+          python bot.py backtest --days ${{ github.event.inputs.days }} 2>&1 | tee data/backtest_result.txt
+          [ -f backtest_trades.csv ] && cp backtest_trades.csv data/backtest_trades.csv || true
+
+      - name: Save result
+        if: always()
+        run: |
+          git config user.name "paper-bot"
+          git config user.email "paper-bot@users.noreply.github.com"
+          git add data/backtest_result.txt data/backtest_trades.csv 2>/dev/null || true
+          git diff --cached --quiet || (git commit -q -m "backtest result" && git pull --rebase -q && git push)
