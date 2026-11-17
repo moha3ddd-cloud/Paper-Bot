@@ -8,16 +8,16 @@
    "since": "2026-11-01"
   },
   "ETH/USDT": {
-   "cash": 0.0,
-   "units": 0.08819634501633265,
-   "entry": 2265.4,
-   "since": "2026-11-01"
+   "cash": 161.06874442305994,
+   "units": 0.0,
+   "entry": null,
+   "since": null
   },
   "SOL/USDT": {
-   "cash": 0.0,
-   "units": 2.0952181208053693,
-   "entry": 95.36,
-   "since": "2026-11-01"
+   "cash": 152.60959083473156,
+   "units": 0.0,
+   "entry": null,
+   "since": null
   },
   "XRP/USDT": {
    "cash": 200.0,
@@ -32,7 +32,24 @@
    "since": "2026-11-01"
   }
  },
- "last_day": "2026-11-16",
- "trades": [],
+ "last_day": "2026-11-17",
+ "trades": [
+  {
+   "symbol": "ETH/USDT",
+   "entry": 2265.4,
+   "exit": 1828.08,
+   "since": "2026-11-01",
+   "until": "2026-11-17",
+   "pct": -19.3
+  },
+  {
+   "symbol": "SOL/USDT",
+   "entry": 95.36,
+   "exit": 72.91,
+   "since": "2026-11-01",
+   "until": "2026-11-17",
+   "pct": -23.54
+  }
+ ],
  "started": "2026-11-01"
 }
