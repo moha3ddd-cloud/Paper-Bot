@@ -2,10 +2,10 @@
  "start": 1000.0,
  "sleeves": {
   "BTC/USDT": {
-   "cash": 0.0,
-   "units": 0.0025707635476536956,
-   "entry": 77720.1,
-   "since": "2026-11-01"
+   "cash": 148.36526759564128,
+   "units": 0.0,
+   "entry": null,
+   "since": null
   },
   "ETH/USDT": {
    "cash": 161.06874442305994,
@@ -26,13 +26,13 @@
    "since": null
   },
   "BNB/USDT": {
-   "cash": 0.0,
-   "units": 0.2841862714419822,
-   "entry": 703.06,
-   "since": "2026-11-01"
+   "cash": 149.0798239439024,
+   "units": 0.0,
+   "entry": null,
+   "since": null
   }
  },
- "last_day": "2026-11-20",
+ "last_day": "2026-11-21",
  "trades": [
   {
    "symbol": "ETH/USDT",
@@ -49,6 +49,22 @@
    "since": "2026-11-01",
    "until": "2026-11-17",
    "pct": -23.54
+  },
+  {
+   "symbol": "BTC/USDT",
+   "entry": 77720.1,
+   "exit": 57770.3,
+   "since": "2026-11-01",
+   "until": "2026-11-21",
+   "pct": -25.67
+  },
+  {
+   "symbol": "BNB/USDT",
+   "entry": 703.06,
+   "exit": 525.11,
+   "since": "2026-11-01",
+   "until": "2026-11-21",
+   "pct": -25.31
   }
  ],
  "started": "2026-11-01"
